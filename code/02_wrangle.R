@@ -1,5 +1,4 @@
 ###########################
-# GitHub Script Template
 # Author: Alex Luscombe
 # Date: August 14, 2023
 # Description: R script to clean and wrangle cannabis charges data provided
@@ -79,8 +78,9 @@ get_data <- function(sheet_url, sheet_name){
 }
 
 # create list of regions to iterate function over in for loop  
-regions <- c("New Brunswick", "Quebec", "Ontario", "Manitoba", "Saskatchewan", "Alberta", 
-             "British Columbia", "Yukon", "Northwest Territories", "Nunavut", "Canada")
+regions <- c("Newfoundland and Labrador", "Prince Edward Island", "Nova Scotia", "New Brunswick", 
+             "Quebec", "Ontario", "Manitoba", "Saskatchewan", "Alberta", "British Columbia", "Yukon", 
+             "Northwest Territories", "Nunavut", "Canada")
 
 # create empty list for output of for loop
 output <- list()
