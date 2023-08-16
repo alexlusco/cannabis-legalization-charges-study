@@ -11,6 +11,8 @@
 
 df <- read_csv("data/police-reported-cannabis-offences-final.csv")
 
+df <- df |> filter(region != "Canada")
+
 # Figure 1: total charges per 100,000 population
 
 df |> 
