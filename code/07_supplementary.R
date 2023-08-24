@@ -96,8 +96,8 @@ violations_table_after <-
     locations = cells_column_labels()
   )
 
-gtsave(violations_table_before, "tables/violations_list_before.png")
-gtsave(violations_table_after, "tables/violations_list_after.png")
+gtsave(violations_table_before, "tables/supplementary/suppl_violations_list_before.png")
+gtsave(violations_table_after, "tables/supplementary/suppl_violations_list_after.png")
 
 # supplementary analysis -- charge punitiveness by region, testing for interaction effect between region:timepoint using
 # mixed-design ANOVA
