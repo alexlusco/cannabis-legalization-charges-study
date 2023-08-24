@@ -102,32 +102,30 @@ gtsave(violations_table_after, "tables/violations_list_after.png")
 # supplementary analysis -- charge punitiveness by region, testing for interaction effect between region:timepoint using
 # mixed-design ANOVA
 df_filtered_youth <- df |> 
-  filter(violation_type %in% c("Possession", "Trafficking", "Drug impaired driving")) |> 
+  filter(violation_type %in% c("Possession", "Drug impaired driving", "Trafficking")) |> 
   filter(year != 2018) |> 
   filter(youth_adult == "Youth") |> 
-  #filter(youth_adult == "Adult") |> 
   mutate(timepoint = ifelse(year < 2018, "Before", "After")) |> 
   reframe(prop_charged = sum(cleared_by_charge, na.rm = TRUE)/sum(total, na.rm = TRUE)*100, .by = c(region, timepoint, violation_type)) |>
   distinct(region, prop_charged, violation_type, .keep_all = TRUE) |> 
-  filter(!is.na(prop_charged)) |> # for youth analysis only
-  group_by(region) |> # for youth analysis only
-  filter(!n() < 6) |> # for youth analysis only
-  group_by(violation_type, region) |> 
+  filter(!is.na(prop_charged)) |> 
+  group_by(region) |> 
+  filter(!n() < 6) |> # for youth, drops yukon, NWT, NB, PEI, Nunavut due to NAs
+  group_by(region, violation_type) |> 
   mutate(subject = cur_group_id()) |> 
   ungroup()
 
 df_filtered_adult <- df |> 
-  filter(violation_type %in% c("Possession", "Trafficking", "Drug impaired driving")) |> 
+  filter(violation_type %in% c("Possession", "Drug impaired driving", "Trafficking")) |> 
   filter(year != 2018) |> 
-  #filter(youth_adult == "Youth") |> 
   filter(youth_adult == "Adult") |> 
   mutate(timepoint = ifelse(year < 2018, "Before", "After")) |> 
   reframe(prop_charged = sum(cleared_by_charge, na.rm = TRUE)/sum(total, na.rm = TRUE)*100, .by = c(region, timepoint, violation_type)) |>
   distinct(region, prop_charged, violation_type, .keep_all = TRUE) |> 
-  #filter(!is.na(prop_charged)) |> # for youth analysis only
-  #group_by(region) |> # for youth analysis only
-  #filter(!n() < 6) |> # for youth analysis only
-  group_by(violation_type, region) |> 
+  filter(!is.na(prop_charged)) |> 
+  group_by(region) |>
+  filter(!n() < 6) |>
+  group_by(region, violation_type) |> 
   mutate(subject = cur_group_id()) |> 
   ungroup()
 
@@ -149,10 +147,10 @@ results_adult <- ezANOVA(
   detailed = TRUE           # will provide detailed output
 )
   
-results_youth_table <- results_youth$ANOVA |> gt() |> tab_header("Adult")
-results_adult_table <- results_adult$ANOVA |> gt() |> tab_header("Youth")
+results_youth_table <- results_youth$ANOVA |> gt() |> tab_header("Youth")
+results_adult_table <- results_adult$ANOVA |> gt() |> tab_header("Adult")
 
-gtsave(results_youth_table, "tables/suppl_anova_youth_table.png")
-gtsave(results_adult_table, "tables/suppl_anova_adult_table.png")
+gtsave(results_youth_table, "tables/supplementary/suppl_anova_youth_table.png")
+gtsave(results_adult_table, "tables/supplementary/suppl_anova_adult_table.png")
 
 

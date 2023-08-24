@@ -27,9 +27,24 @@ charges_to_drop <- c("Operation while impaired (alcohol)",
                      "Failure or refusal to comply with demand, accident resulting in death (unspecified)", 
                      "Operation while prohibited")
 
+charges_to_drop_robustness_check <- c("Operation while impaired (alcohol)", 
+                     "Operation while impaired causing bodily harm (alcohol)", 
+                     #"Operation while impaired (unspecified)",
+                     #"Operation while impaired causing bodily harm (unspecified)", 
+                     "Operation while impaired causing death (alcohol)", 
+                     #"Operation while impaired causing death (unspecified)", 
+                     "Failure or refusal to comply with demand (alcohol)", 
+                     "Failure or refusal to comply with demand (unspecified)", 
+                     "Failure or refusal to comply with demand, accident resulting in bodily harm (alcohol)", 
+                     "Failure or refusal to comply with demand, accident resulting in bodily harm (unspecified)", 
+                     "Failure or refusal to comply with demand, accident resulting in death (alcohol)", 
+                     "Failure or refusal to comply with demand, accident resulting in death (unspecified)", 
+                     "Operation while prohibited")
+
 df <- df |> 
   filter(age_group != "Total" & gender != "Total") |>
-  filter(!violation %in% charges_to_drop) |> 
+  filter(!violation %in% charges_to_drop) |> # comment out and replace with filter below to create df with unspecific drug impairing driving charges included
+  #filter(!violation %in% charges_to_drop_robustness_check) |> 
   mutate(violation_type = case_when(
     # possession
     violation %in% c("Cannabis- Possession (Pre Legalization)", 
@@ -59,7 +74,18 @@ df <- df |>
                      "Possess, produce, sell, distribute or import anything for use in production or distribution of illicit cannabis", 
                      "Obtain, offer to obtain, alter or offer to alter cannabis", "Other Cannabis Act") ~ "Production and cultivation",
     # drug impaired driving
-    violation %in% c("Operation while impaired (drugs)", "Operation- low blood drug concentration", "peration- low blood drug concentration", "Operation while impaired (alcohol and drugs)", "Operation while impaired causing bodily harm (drugs)", "Operation while impaired causing bodily harm (alcohol and drugs)", "Operation while impaired causing death (drugs)", "Operation while impaired causing death (alcohol and drugs)") ~ "Drug impaired driving",
+    violation %in% c("Operation while impaired (drugs)", 
+                     "Operation- low blood drug concentration", 
+                     "peration- low blood drug concentration", 
+                     "Operation while impaired (alcohol and drugs)", 
+                     "Operation while impaired causing bodily harm (drugs)", 
+                     "Operation while impaired causing bodily harm (alcohol and drugs)", 
+                     "Operation while impaired causing death (drugs)", 
+                     "Operation while impaired causing death (alcohol and drugs)",
+                     "Operation while impaired (unspecified)", # only retained in robustness check dataset
+                     "Operation while impaired causing bodily harm (unspecified)", # only retained in robustness check dataset
+                     "Operation while impaired causing death (unspecified)" # only retained in robustness check dataset
+                     ) ~ "Drug impaired driving",
     TRUE ~ "Other"
   ))
 
@@ -112,3 +138,5 @@ df <- df |>
 
 # write result as csv
 write_csv(df, "data/police-reported-cannabis-offences-final.csv")
+#write_csv(df, "data/police-reported-cannabis-offences-robustness-check.csv") # filtered on charges_to_drop_robustness_check
+

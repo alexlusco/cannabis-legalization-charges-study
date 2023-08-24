@@ -126,7 +126,7 @@ df |>
        colour = "",
   )
 
-ggsave("figures/adult_youth_charges_by_region.png", width = 9, height = 12)
+ggsave("figures/supplementary/suppl_adult_youth_charges_by_region.png", width = 9, height = 12)
 
 df |> 
   group_by(year_diff, violation_type, region, youth_adult) |> 
@@ -159,4 +159,4 @@ df |>
        colour = "",
   )
 
-ggsave("figures/adult_youth_disposition_by_region.png", width = 9, height = 12)
+ggsave("figures/supplementary/suppl_adult_youth_disposition_by_region.png", width = 9, height = 12)
