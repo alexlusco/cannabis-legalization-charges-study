@@ -123,13 +123,13 @@ before_after_means_disposition <- function(dat, group, charge_type) {
     filter(year < 2018) |> 
     reframe(prop_charged = sum(cleared_by_charge, na.rm = TRUE)/sum(total, na.rm = TRUE)*100, .by = c(year, region)) |> 
     distinct(year, region, prop_charged, .keep_all = TRUE) |> 
-    filter(is.na(prop_charged))
+    filter(!is.na(prop_charged))
   
   df_after <- df_filtered |> 
     filter(year >= 2019) |> 
     reframe(prop_charged = sum(cleared_by_charge, na.rm = TRUE)/sum(total, na.rm = TRUE)*100, .by = c(year, region)) |> 
     distinct(year, region, prop_charged, .keep_all = TRUE) |> 
-    filter(is.na(prop_charged))
+    filter(!is.na(prop_charged))
   
   t_test_results <- t.test(x = df_after$prop_charged, y = df_before$prop_charged)
   
@@ -146,13 +146,13 @@ before_after_cohens_disposition <- function(dat, group, charge_type) {
     filter(year < 2018) |> 
     reframe(prop_charged = sum(cleared_by_charge, na.rm = TRUE)/sum(total, na.rm = TRUE)*100, .by = c(year, region)) |> 
     distinct(year, region, prop_charged, .keep_all = TRUE) |> 
-    filter(is.na(prop_charged))
+    mutate(prop_charged = ifelse(is.na(prop_charged), 0, prop_charged))
   
   df_after <- df_filtered |> 
     filter(year >= 2019) |> 
     reframe(prop_charged = sum(cleared_by_charge, na.rm = TRUE)/sum(total, na.rm = TRUE)*100, .by = c(year, region)) |> 
     distinct(year, region, prop_charged, .keep_all = TRUE) |> 
-    filter(is.na(prop_charged))
+    mutate(prop_charged = ifelse(is.na(prop_charged), 0, prop_charged))
   
   cohens_results <- cohen.d(df_after$prop_charged, df_before$prop_charged)
   
@@ -199,8 +199,8 @@ disposition_results_table <- disposition_results |>
   #mutate(mean_difference = paste(mean_difference, " [", conf_interval_upper, ", ", conf_interval_lower, "]", sep = "")) |> 
   select(-conf_interval_lower, -conf_interval_upper) |> 
   mutate(cohens = case_when(
-    abs(cohens) >= 0.2 & abs(cohens) < 5.0 ~ paste(cohens, "(small)"),
-    abs(cohens) >= 0.5 & abs(cohens) < 8.0 ~ paste(cohens, "(medium)"),
+    abs(cohens) >= 0.2 & abs(cohens) < 0.5 ~ paste(cohens, "(small)"),
+    abs(cohens) >= 0.5 & abs(cohens) < 0.8 ~ paste(cohens, "(medium)"),
     abs(cohens) >= 0.8 ~ paste(cohens, "(large)"),
     TRUE ~ as.character(cohens)
   )) |> 

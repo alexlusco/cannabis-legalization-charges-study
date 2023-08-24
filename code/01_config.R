@@ -9,4 +9,4 @@
 # script starts here
 
 # install.packages("pacman")
-pacman::p_load(readr, readxl, dplyr, tibble, tidyr, stringr, ggplot2, gt, webshot2, effsize)
+pacman::p_load(readr, readxl, dplyr, tibble, tidyr, stringr, ggplot2, gt, webshot2, effsize, ez)

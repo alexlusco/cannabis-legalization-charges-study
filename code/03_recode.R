@@ -15,6 +15,7 @@ df <- read_csv("data/police-reported-cannabis-offences-cleaned.csv")
 
 charges_to_drop <- c("Operation while impaired (alcohol)", 
                      "Operation while impaired causing bodily harm (alcohol)", 
+                     "Operation while impaired (unspecified)",
                      "Operation while impaired causing bodily harm (unspecified)", 
                      "Operation while impaired causing death (alcohol)", 
                      "Operation while impaired causing death (unspecified)", 
@@ -58,7 +59,7 @@ df <- df |>
                      "Possess, produce, sell, distribute or import anything for use in production or distribution of illicit cannabis", 
                      "Obtain, offer to obtain, alter or offer to alter cannabis", "Other Cannabis Act") ~ "Production and cultivation",
     # drug impaired driving
-    violation %in% c("Operation while impaired (drugs)", "Operation while impaired (unspecified)", "Operation- low blood drug concentration", "peration- low blood drug concentration", "Operation while impaired (alcohol and drugs)", "Operation while impaired causing bodily harm (drugs)", "Operation while impaired causing bodily harm (alcohol and drugs)", "Operation while impaired causing death (drugs)", "Operation while impaired causing death (alcohol and drugs)") ~ "Drug impaired driving",
+    violation %in% c("Operation while impaired (drugs)", "Operation- low blood drug concentration", "peration- low blood drug concentration", "Operation while impaired (alcohol and drugs)", "Operation while impaired causing bodily harm (drugs)", "Operation while impaired causing bodily harm (alcohol and drugs)", "Operation while impaired causing death (drugs)", "Operation while impaired causing death (alcohol and drugs)") ~ "Drug impaired driving",
     TRUE ~ "Other"
   ))
 
