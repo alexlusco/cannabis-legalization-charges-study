@@ -550,7 +550,7 @@ disposition_output_for_table <- disposition_output |>
 
 table3 <- bind_rows(charge_output_for_table, disposition_output_for_table)
 
-table3 <- mutate(table3, outcome = ifelse(outcome == "Charges", "Outcome 1: Charges (paired samples t-test)", "Outcome 2: Punitiveness (Welch's unequal variances t-test)"))
+table3 <- mutate(table3, outcome = ifelse(outcome == "Charges", "Outcome 1: Charge rates (paired samples t-test)", "Outcome 2: Charge outcome severity (Welch's unequal variances t-test)"))
 
 table3 <- table3 |> 
   group_by(outcome) |> 
@@ -564,6 +564,6 @@ table3 <- table3 |>
     locations = cells_column_labels()
   )
 
-gtsave(table3, "tables/charges_punitiveness_all.png")
+gtsave(table3, "tables/charges_severity_all.png")
 
 
