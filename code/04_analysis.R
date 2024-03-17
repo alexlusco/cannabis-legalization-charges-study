@@ -307,8 +307,8 @@ table2 <- disposition_results_table |>
     locations = cells_column_labels()
   )
 
-gtsave(table1, "tables/charges_table_paired.png")
-gtsave(table2, "tables/dispositions_table_welchs.png")
+gtsave(table1, "tables/charges_table_paired.docx")
+gtsave(table2, "tables/dispositions_table_welchs.docx")
 
 #####################################################
 
@@ -564,6 +564,5 @@ table3 <- table3 |>
     locations = cells_column_labels()
   )
 
-gtsave(table3, "tables/charges_severity_all.png")
-
+gtsave(table3, "tables/charges_severity_all.docx")
 

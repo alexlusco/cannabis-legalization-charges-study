@@ -96,8 +96,8 @@ violations_table_after <-
     locations = cells_column_labels()
   )
 
-gtsave(violations_table_before, "tables/supplementary/suppl_violations_list_before.png")
-gtsave(violations_table_after, "tables/supplementary/suppl_violations_list_after.png")
+gtsave(violations_table_before, "tables/supplementary/suppl_violations_list_before.docx")
+gtsave(violations_table_after, "tables/supplementary/suppl_violations_list_after.docx")
 
 # supplementary analysis -- charge rates by region, testing for interaction effect between region:timepoint using
 # mixed-design ANOVA
@@ -152,8 +152,8 @@ results_adult <- ezANOVA(
 results_youth_rates_table <- results_youth$ANOVA |> gt() |> tab_header("Youth")
 results_adult_rates_table <- results_adult$ANOVA |> gt() |> tab_header("Adult")
 
-gtsave(results_youth_rates_table, "tables/supplementary/suppl_anova_youth_rates_table.png")
-gtsave(results_adult_rates_table, "tables/supplementary/suppl_anova_adult_rates_table.png")
+gtsave(results_youth_rates_table, "tables/supplementary/suppl_anova_youth_rates_table.docx")
+gtsave(results_adult_rates_table, "tables/supplementary/suppl_anova_adult_rates_table.docx")
 
 # supplementary analysis -- charge outcome severity by region, testing for interaction effect between region:timepoint using
 # mixed-design ANOVA
@@ -206,7 +206,7 @@ results_adult <- ezANOVA(
 results_youth_severity_table <- results_youth$ANOVA |> gt() |> tab_header("Youth")
 results_adult_severity_table <- results_adult$ANOVA |> gt() |> tab_header("Adult")
 
-gtsave(results_youth_severity_table, "tables/supplementary/suppl_anova_youth_severity_table.png")
-gtsave(results_adult_severity_table, "tables/supplementary/suppl_anova_adult_severity_table.png")
+gtsave(results_youth_severity_table, "tables/supplementary/suppl_anova_youth_severity_table.docx")
+gtsave(results_adult_severity_table, "tables/supplementary/suppl_anova_adult_severity_table.docx")
 
 
