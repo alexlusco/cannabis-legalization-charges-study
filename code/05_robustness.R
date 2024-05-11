@@ -1,5 +1,5 @@
 ###########################
-# Author: Alex Luscombe
+# Author:
 # Date: August 14, 2023
 # Description: R script to compute before-after t statistics, 
 # and cohens d on total charges per 100,000 population and 

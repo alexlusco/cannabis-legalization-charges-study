@@ -1,5 +1,5 @@
 ###########################
-# Author: Alex Luscombe
+# Author:
 # Date: August 14, 2023
 # Description: R script to clean and wrangle cannabis charges data provided
 # by Statistics Canada

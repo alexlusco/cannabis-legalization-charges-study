@@ -1,5 +1,5 @@
 ###########################
-# Author: Alex Luscombe
+# Author:
 # Date: August 14, 2023
 # Description: R script to recode violations, age groups, correct
 # handful of presumed incorrectly entered charge data, calculate year
