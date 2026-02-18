@@ -51,6 +51,7 @@ rsconnect/
 # old analysis files
 *_old.R
 figures_old/
+tables_old/
 
 # word docs
 *.docx
