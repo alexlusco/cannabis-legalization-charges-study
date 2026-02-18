@@ -1,7 +1,7 @@
 ###########################
 # Author:
-# Date: August 14, 2023
-# Description: R script to obtain misc descriptive statistics
+# Date: February 17, 2026
+# Description: R script to obtain misc descriptive statistics, incl. supplementary tables showing number of CC offences before / after legalization with counts
 # Notes: 
 #   - 01_config needs to be run first to load required libraries
 ###########################

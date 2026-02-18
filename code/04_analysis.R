@@ -1,3 +1,11 @@
+###########################
+# Author:
+# Date: February 17, 2026
+# Description: R script to run ITS analysis on charge and dispositions, includes DHARMa diagnostc tests
+# Notes: 
+#   - 01_config needs to be run first to load required libraries
+###########################
+
 #### 1) Load and clean data ####
 df <- read_csv("data/police-reported-cannabis-offences-final.csv") %>%
   filter(region != "Canada") %>%
